@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import Fade from 'react-reveal/Fade';
 
 class Section extends Component {
     state = {  }
@@ -8,19 +9,26 @@ class Section extends Component {
         const {title, description, backgroundImage, leftBtnText, rightBtnText} = this.props;
         return ( 
             <Wrap bgImage={backgroundImage}>
-                <ItemText>
-                    <h1>{title}</h1>
-                    <p>
-                        {description}
-                    </p>
-                </ItemText>
-                <Buttons>
-                    <ButtonGroup>
-                        <LeftButton>{leftBtnText}</LeftButton>
-                        {rightBtnText && <RightButton>{rightBtnText}</RightButton>}
-                    </ButtonGroup>
-                    <DownArrow src="/images/down-arrow.svg" alt='down' />
-                </Buttons>
+
+                <Fade bottom>
+                    <ItemText>
+                        <h1>{title}</h1>
+                        <p>
+                            {description}
+                        </p>
+                    </ItemText>
+                </Fade>
+
+                <Fade bottom>
+                    <Buttons>
+                        <ButtonGroup>
+                            <LeftButton>{leftBtnText}</LeftButton>
+                            {rightBtnText && <RightButton>{rightBtnText}</RightButton>}
+                        </ButtonGroup>
+                        <DownArrow src="/images/down-arrow.svg" alt='down' />
+                    </Buttons>
+                </Fade>
+
             </Wrap>
          );
     }
