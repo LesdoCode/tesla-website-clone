@@ -1,11 +1,21 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import MenuIcon from '@material-ui/icons/Menu';
 import CloseIcon from '@material-ui/icons/Close';
+import { selectCars } from '../features/car/car-slice';
+import { useSelector } from 'react-redux';
 
 class header extends Component {
-    state = {  }
+    state = { 
+        brugerStatus: false
+    }
+
+    setBrugerStatus(state) {
+        this.setState({ brugerStatus: state })
+    }
+
     render() { 
+        console.log("car stuff:", selectCars);
         return ( 
             <Container>
                 <a>
@@ -21,25 +31,25 @@ class header extends Component {
                 <RightMenu>
                     <a href="#">Shop</a>
                     <a href="#">Tesla Account</a>
-                    <CustomMenu />
+                    <CustomMenu onClick={() => this.setBrugerStatus(true)} />
                 </RightMenu>
 
-                <BrugerNav>
+                <BrugerNav show={this.state.brugerStatus}>
                     <CloseButtonWrapper>
-                        <CustomClose/>
+                        <CustomClose onClick={() => this.setBrugerStatus(false)} />
                     </CloseButtonWrapper>
 
-                    
+                    <li><a href="#">Model S Inventory</a></li>
+                    <li><a href="#">Model 3 Inventory</a></li>
+                    <li><a href="#">Model X Inventory</a></li>
+                    <li><a href="#">Model Y Inventory</a></li>
                     <li><a href="#">Existing Inventory</a></li>
                     <li><a href="#">Used Inventory</a></li>
                     <li><a href="#">Trade In</a></li>
                     <li><a href="#">Cybertruck</a></li>
                     <li><a href="#">Roadster</a></li>
-                    <li><a href="#">Existing Inventory</a></li>
-                    <li><a href="#">Existing Inventory</a></li>
-                    <li><a href="#">Existing Inventory</a></li>
-                    <li><a href="#">Existing Inventory</a></li>
-                    <li><a href="#">Existing Inventory</a></li>
+                    
+                    
                 </BrugerNav>
             </Container>
          );
@@ -116,6 +126,9 @@ const BrugerNav = styled.div`
     a {
         font-weight: 600;
     }
+    transition: transform 0.2s;
+    transform ${props => props.show ? 'translateX(0)': 'translateX(100%)'}
+    
 `
 
 const CustomClose = styled(CloseIcon)``
